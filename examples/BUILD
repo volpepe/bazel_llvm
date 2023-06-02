@@ -28,6 +28,13 @@ sh_test(
     args = ["$(location @llvm//13.0.0:clang)"],
 )
 
+sh_test(
+    name = "clang-compile-16.0.0",
+    srcs = ["clang-compile.sh"],
+    data = ["@llvm//16.0.0:clang"],
+    args = ["$(location @llvm//16.0.0:clang)"],
+)
+
 cc_binary(
     name = "clang-interpreter-10.0.0",
     srcs = ["clang-interpreter.cc"],
@@ -112,4 +119,15 @@ cc_test(
         "-fno-rtti",
     ],
     deps = ["@llvm//13.0.0"],
+)
+
+cc_test(
+    name = "hello-world-16.0.0",
+    srcs = ["hello-world.cc"],
+    copts = [
+        "-std=c++17",
+        "-fno-exceptions",
+        "-fno-rtti",
+    ],
+    deps = ["@llvm//16.0.0"],
 )
